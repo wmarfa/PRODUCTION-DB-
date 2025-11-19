@@ -1540,6 +1540,8 @@ if (isset($_GET['action'])) {
 
 </div>
 
+<?php endif; ?>
+
 <!-- Add User Modal -->
 <div id="addUserModal" class="modal">
     <div class="modal-content">

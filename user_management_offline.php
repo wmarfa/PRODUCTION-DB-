@@ -1455,7 +1455,7 @@ if (isset($_GET['action'])) {
                 </div>
                 <?php
                 }
-                } else {
+                if (empty($activities)) {
                 ?>
                 <div class="text-center py-5">
                     <div style="font-size: 3rem; margin-bottom: 1rem;">📋</div>

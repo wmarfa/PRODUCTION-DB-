@@ -1290,7 +1290,7 @@ if (isset($_GET['action'])) {
             </div>
             <?php
                 }
-            if (!empty($users)) {
+            if (empty($users)) {
             ?>
                 <div class="text-center py-5">
                     <div style="font-size: 3rem; margin-bottom: 1rem;">👥</div>
@@ -1298,6 +1298,14 @@ if (isset($_GET['action'])) {
                     <p class="text-muted">Click "Add User" to create your first user account.</p>
                 </div>
             <?php
+            }
+            } catch(PDOException $e) {
+                error_log("Users Loading Error: " . $e->getMessage());
+                echo '<div class="text-center py-5">';
+                echo '<div style="font-size: 3rem; margin-bottom: 1rem;">⚠️</div>';
+                echo '<h4>Error Loading Users</h4>';
+                echo '<p class="text-muted">Please check the database connection and try again.</p>';
+                echo '</div>';
             }
             ?>
         </div>

@@ -556,6 +556,11 @@ if (isset($_GET['action'])) {
         // Show login form
     }
 }
+
+// Generate HTML with offline assets - only after all redirects
+$asset_manager = $GLOBALS['asset_manager'];
+echo $asset_manager->generateHTMLHeader("User Management System - Offline");
+echo $asset_manager->getOfflineFontCSS();
 ?>
 
 <style>

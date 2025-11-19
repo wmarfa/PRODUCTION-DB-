@@ -189,32 +189,48 @@ $assets = new AssetsManager();
             <p class="lead mb-4">
                 Comprehensive Offline Production Control for Manufacturing Excellence
             </p>
-            <div class="row justify-content-center">
-                <div class="col-md-3 col-sm-6 mb-3">
-                    <div class="stats-card text-center">
-                        <h3><?php echo $totalLines; ?></h3>
-                        <small>Production Lines</small>
+
+            <?php if (!$databaseConnected): ?>
+                <!-- Database Setup Required -->
+                <div class="alert alert-warning mb-4" style="background: rgba(255, 193, 7, 0.9); color: #000; border: none; padding: 20px; border-radius: 8px;">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Database Setup Required</h4>
+                    <p class="mb-3">The database needs to be set up before you can use the Production Management System.</p>
+                    <a href="create_database.php" class="btn btn-lg" style="background: #28a745; color: white; padding: 12px 30px; margin: 5px;">
+                        <i class="fas fa-database"></i> Setup Database
+                    </a>
+                    <a href="database_migration_fix.php" class="btn btn-lg" style="background: #17a2b8; color: white; padding: 12px 30px; margin: 5px;">
+                        <i class="fas fa-tools"></i> Migration Fix
+                    </a>
+                </div>
+            <?php else: ?>
+                <!-- System Statistics -->
+                <div class="row justify-content-center">
+                    <div class="col-md-3 col-sm-6 mb-3">
+                        <div class="stats-card text-center">
+                            <h3><?php echo $totalLines; ?></h3>
+                            <small>Production Lines</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 mb-3">
+                        <div class="stats-card text-center">
+                            <h3><?php echo number_format($todayOutput); ?></h3>
+                            <small>Today's Output</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 mb-3">
+                        <div class="stats-card text-center">
+                            <h3><?php echo $activeAlerts; ?></h3>
+                            <small>Active Alerts</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 mb-3">
+                        <div class="stats-card text-center">
+                            <h3><?php echo $systemUptime; ?>%</h3>
+                            <small>System Uptime</small>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-3 col-sm-6 mb-3">
-                    <div class="stats-card text-center">
-                        <h3><?php echo number_format($todayOutput); ?></h3>
-                        <small>Today's Output</small>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 mb-3">
-                    <div class="stats-card text-center">
-                        <h3><?php echo $activeAlerts; ?></h3>
-                        <small>Active Alerts</small>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 mb-3">
-                    <div class="stats-card text-center">
-                        <h3><?php echo $systemUptime; ?>%</h3>
-                        <small>System Uptime</small>
-                    </div>
-                </div>
-            </div>
+            <?php endif; ?>
         </div>
     </section>
 

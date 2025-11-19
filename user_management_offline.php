@@ -4,11 +4,13 @@
 require_once "config.php";
 require_once "assets.php";
 
+// Session security - only start if not already active
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
 $database = Database::getInstance();
 $db = $database->getConnection();
-
-// Session security
-session_start();
 
 // Initialize session if not exists
 if (!isset($_SESSION['csrf_token'])) {

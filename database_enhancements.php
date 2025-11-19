@@ -1,7 +1,7 @@
 <?php
 // database_enhancements.php - Enhanced database schema for systematic production management
 
-require_once "config.php";
+require_once "config_simple.php";
 
 $database = Database::getInstance();
 $db = $database->getConnection();

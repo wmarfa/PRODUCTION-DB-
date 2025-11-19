@@ -543,19 +543,20 @@ function requireLogin() {
     }
 }
 
-// Generate HTML with offline assets
-$asset_manager = $GLOBALS['asset_manager'];
-echo $asset_manager->generateHTMLHeader("User Management System - Offline");
-echo $asset_manager->getOfflineFontCSS();
-
 // Handle login/logout redirect
 if (isset($_GET['action'])) {
     if ($_GET['action'] === 'logout') {
         logoutUser();
+        exit; // Important: exit after logout
     } elseif ($_GET['action'] === 'login' && !isLoggedIn()) {
         // Show login form
     }
 }
+
+// Generate HTML with offline assets - only after all redirects
+$asset_manager = $GLOBALS['asset_manager'];
+echo $asset_manager->generateHTMLHeader("User Management System - Offline");
+echo $asset_manager->getOfflineFontCSS();
 ?>
 
 <style>

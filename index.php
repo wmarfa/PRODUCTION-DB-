@@ -195,14 +195,17 @@ $assets = new AssetsManager();
                 <div class="alert alert-warning mb-4" style="background: rgba(255, 193, 7, 0.9); color: #000; border: none; padding: 20px; border-radius: 8px;">
                     <h4><i class="fas fa-exclamation-triangle"></i> Database Setup Required</h4>
                     <p class="mb-3">The database needs to be set up before you can use the Production Management System.</p>
-                    <a href="safe_database_setup.php" class="btn btn-lg" style="background: #28a745; color: white; padding: 12px 30px; margin: 5px;">
-                        <i class="fas fa-database"></i> Safe Database Setup
+                    <a href="database_diagnostic.php" class="btn btn-lg" style="background: #17a2b8; color: white; padding: 12px 30px; margin: 5px;">
+                        <i class="fas fa-stethoscope"></i> Diagnose First
                     </a>
-                    <a href="create_database.php" class="btn btn-lg" style="background: #17a2b8; color: white; padding: 12px 30px; margin: 5px;">
-                        <i class="fas fa-tools"></i> Fresh Setup
+                  <a href="safe_database_setup.php" class="btn btn-lg" style="background: #28a745; color: white; padding: 12px 30px; margin: 5px;">
+                        <i class="fas fa-database"></i> Safe Setup
                     </a>
-                    <a href="database_migration_fix.php" class="btn btn-lg" style="background: #ffc107; color: black; padding: 12px 30px; margin: 5px;">
-                        <i class="fas fa-cogs"></i> Migration Fix
+                  <a href="clean_database_setup.php" class="btn btn-lg" style="background: #dc3545; color: white; padding: 12px 30px; margin: 5px;">
+                        <i class="fas fa-trash-alt"></i> Clean Setup
+                    </a>
+                  <a href="database_migration_fix.php" class="btn btn-lg" style="background: #ffc107; color: black; padding: 12px 30px; margin: 5px;">
+                        <i class="fas fa-cogs"></i> Migration
                     </a>
                 </div>
             <?php else: ?>

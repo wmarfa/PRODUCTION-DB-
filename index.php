@@ -49,7 +49,7 @@ if ($databaseConnected && $pdo) {
     }
 }
 
-$assets = new AssetsManager();
+$assets = new AssetManager();
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -1922,33 +1922,6 @@ function loadActivityLog() {
 if (document.getElementById('users-tab')) {
     document.getElementById('users-tab').classList.add('active');
 }
-if (document.getElementById('dashboard-grid')) {
-    showTab('dashboard');
-}
-
-function showTab(tabName) {
-    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-
-    event.target.classList.add('active');
-    document.getElementById(tabName + '-tab').classList.add('active');
-
-    if (tabName === 'dashboard') {
-        showTab('dashboard');
-    }
-}
-
-function showTab(tabName) {
-    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-
-    event.target.classList.add('active');
-    document.getElementById(tabName + '-tab').classList.add('active');
-
-    if (tabName === 'dashboard') {
-        showDashboard();
-    }
-}
 
 function showDashboard() {
     // Implementation would show user dashboard based on role

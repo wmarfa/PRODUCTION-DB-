@@ -1464,6 +1464,14 @@ if (isset($_GET['action'])) {
                 </div>
                 <?php
                 }
+                } catch(PDOException $e) {
+                    error_log("Activity Log Error: " . $e->getMessage());
+                    echo '<div class="text-center py-5">';
+                    echo '<div style="font-size: 3rem; margin-bottom: 1rem;">⚠️</div>';
+                    echo '<h4>Error Loading Activity</h4>';
+                    echo '<p class="text-muted">Please check the database connection and try again.</p>';
+                    echo '</div>';
+                }
                 ?>
             </div>
         </div>

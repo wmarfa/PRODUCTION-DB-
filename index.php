@@ -1,11 +1,15 @@
 <?php
 session_start();
 require_once 'assets.php';
-require_once 'database_enhancements.php';
+require_once 'config_simple.php';
 
 // Initialize database connection
-$database = new DatabaseEnhancer();
-$pdo = $database->connect();
+try {
+    $pdo = getDatabaseConnection();
+} catch (Exception $e) {
+    // Connection will be handled by config_simple.php error page
+    die("Database connection failed: " . $e->getMessage());
+}
 
 // Check if user is logged in
 $loggedIn = isset($_SESSION['user_id']) && !empty($_SESSION['user_id']);

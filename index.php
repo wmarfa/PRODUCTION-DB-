@@ -4,11 +4,15 @@ require_once 'assets.php';
 require_once 'config_simple.php';
 
 // Initialize database connection
+$pdo = null;
+$databaseConnected = false;
+
 try {
     $pdo = getDatabaseConnection();
+    $databaseConnected = true;
 } catch (Exception $e) {
-    // Connection will be handled by config_simple.php error page
-    die("Database connection failed: " . $e->getMessage());
+    // Database connection failed - show setup page
+    $databaseConnected = false;
 }
 
 // Check if user is logged in
@@ -17,27 +21,32 @@ $userRole = $loggedIn ? $_SESSION['role'] : 'guest';
 $userName = $loggedIn ? $_SESSION['username'] : 'Guest';
 
 // Get system statistics for welcome page
-try {
-    // Production lines count
-    $stmt = $pdo->query("SELECT COUNT(*) as total_lines FROM production_lines");
-    $totalLines = $stmt->fetch()['total_lines'];
+$totalLines = 0;
+$todayOutput = 0;
+$activeAlerts = 0;
+$systemUptime = 0;
 
-    // Today's production
-    $stmt = $pdo->query("SELECT SUM(actual_output) as today_output FROM daily_performance WHERE date = CURDATE()");
-    $todayOutput = $stmt->fetch()['today_output'] ?? 0;
+if ($databaseConnected && $pdo) {
+    try {
+        // Production lines count
+        $stmt = $pdo->query("SELECT COUNT(*) as total_lines FROM production_lines");
+        $totalLines = $stmt->fetch()['total_lines'];
 
-    // Active alerts
-    $stmt = $pdo->query("SELECT COUNT(*) as active_alerts FROM production_alerts WHERE status = 'active'");
-    $activeAlerts = $stmt->fetch()['active_alerts'];
+        // Today's production
+        $stmt = $pdo->query("SELECT SUM(actual_output) as today_output FROM daily_performance WHERE date = CURDATE()");
+        $todayOutput = $stmt->fetch()['today_output'] ?? 0;
 
-    // System uptime (simulated)
-    $systemUptime = 99.8;
+        // Active alerts
+        $stmt = $pdo->query("SELECT COUNT(*) as active_alerts FROM production_alerts WHERE status = 'active'");
+        $activeAlerts = $stmt->fetch()['active_alerts'];
 
-} catch (PDOException $e) {
-    $totalLines = 0;
-    $todayOutput = 0;
-    $activeAlerts = 0;
-    $systemUptime = 0;
+        // System uptime (simulated)
+        $systemUptime = 99.8;
+
+    } catch (PDOException $e) {
+        // Query failed - keep default values
+        error_log("Database query failed: " . $e->getMessage());
+    }
 }
 
 $assets = new AssetsManager();
